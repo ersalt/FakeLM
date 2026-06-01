@@ -3,6 +3,7 @@
 Provides the generator factory that builds the configured engine graph from AppConfig.
 """
 
+from pathlib import Path
 from typing import Dict, Optional
 
 from fakellm.config import AppConfig
@@ -11,6 +12,27 @@ from fakellm.generation.composite import CompositeGenerator
 from fakellm.generation.markov import MarkovGenerator
 from fakellm.generation.random_char import RandomCharGenerator
 from fakellm.generation.template import TemplateGenerator
+
+# Base directory of the fakellm package (one level up from this file)
+_PACKAGE_DIR = Path(__file__).resolve().parent.parent
+
+
+def _resolve_data_path(filepath: str) -> str:
+    """Resolve a data file path relative to the fakellm package directory.
+
+    If the path is absolute it is returned as-is; otherwise it is joined
+    with the fakellm package directory.
+
+    Args:
+        filepath: A relative or absolute file path.
+
+    Returns:
+        An absolute path string.
+    """
+    p = Path(filepath)
+    if not p.is_absolute():
+        return str(_PACKAGE_DIR / p)
+    return str(p)
 
 
 def get_generator(config: AppConfig) -> BaseGenerator:
@@ -42,15 +64,17 @@ def get_generator(config: AppConfig) -> BaseGenerator:
     mk_cfg = engines_cfg.get("markov", {})
     generators["markov"] = MarkovGenerator(
         n=mk_cfg.get("n", 2),
-        chain_file=mk_cfg.get("chain_file", "data/markov_chains/zh_2gram.json"),
+        chain_file=_resolve_data_path(mk_cfg.get("chain_file", "data/markov_chains/zh_2gram.json")),
         fallback_to_random=mk_cfg.get("fallback_to_random", True),
     )
 
     # Template generator
     tp_cfg = engines_cfg.get("template", {})
     generators["template"] = TemplateGenerator(
-        topics_file=tp_cfg.get("topics_file", "data/topics/topics.json"),
+        topics_file=_resolve_data_path(tp_cfg.get("topics_file", "data/topics/topics.json")),
         default_reply=tp_cfg.get("default_reply", "我是一个随机模型，请提出更明确的问题。"),
+        auto_extend=tp_cfg.get("auto_extend", True),
+        extend_threshold=tp_cfg.get("extend_threshold", 0.3),
     )
 
     # If default engine is composite, wrap all generators in a CompositeGenerator

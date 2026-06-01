@@ -2,16 +2,19 @@
 
 import asyncio
 import logging
+import os
 import time
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 
 from pydantic import ValidationError
 
 from fakellm.api_adapters.openai import (
     build_sse_event,
+    build_stats_event,
     from_internal,
     get_models_list,
     stream_chunk,
@@ -35,6 +38,12 @@ _logger = logging.getLogger("fakellm")
 
 app = FastAPI(title="FakeLM", description="A fake LLM API server", version="0.1.0")
 
+# Determine static directory absolute path
+_static_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "static")
+
+# Mount static files
+app.mount("/static", StaticFiles(directory=_static_dir), name="static")
+
 # Fake model middleware — simulated delays, errors, rate limiting (added first so it wraps everything)
 app.add_middleware(FakeModelMiddleware, config=_config)
 
@@ -46,6 +55,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+async def root():
+    """Serve the chat UI."""
+    return FileResponse(os.path.join(_static_dir, "index.html"))
 
 
 @app.get("/v1/models")
@@ -113,8 +128,15 @@ async def chat_completions(request: Request):
                 engine_name,
             )
 
+        stats = {
+            "engine": engine_name,
+            "elapsed": elapsed,
+            "tokens": token_count,
+            "speed": tokens_per_sec,
+        }
+
         return JSONResponse(
-            content=from_internal(response, model=model),
+            content=from_internal(response, model=model, stats=stats),
             headers={
                 "X-FakeLM-Engine": engine_name,
                 "X-FakeLM-Speed": f"{tokens_per_sec:.0f} tokens/s",
@@ -154,6 +176,15 @@ async def _stream_generator(request: InternalRequest, model: str):
             tokens_per_sec,
             engine_name,
         )
+
+    # Yield stats event before final chunk
+    stats = {
+        "engine": engine_name,
+        "elapsed": elapsed,
+        "tokens": token_count,
+        "speed": tokens_per_sec,
+    }
+    yield build_stats_event(stats)
 
     final_chunk = stream_chunk(model, "", finish_reason="stop")
     yield build_sse_event(final_chunk)

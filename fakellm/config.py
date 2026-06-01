@@ -5,6 +5,9 @@ from typing import Any, Dict, Optional
 
 import yaml
 
+# Base directory of the fakellm package (one level up from this file)
+_PACKAGE_DIR = Path(__file__).resolve().parent
+
 
 class AppConfig:
     """Application configuration loaded from a YAML file."""
@@ -14,10 +17,16 @@ class AppConfig:
         Load configuration from the specified YAML file.
 
         Args:
-            config_path: Path to the config YAML file. Defaults to 'data/config.yaml'.
+            config_path: Path to the config YAML file. If relative, resolved
+                         relative to the fakellm package directory.
+                         Defaults to 'data/config.yaml' (inside fakellm package).
         """
         if config_path is None:
-            config_path = "data/config.yaml"
+            config_path = str(_PACKAGE_DIR / "data" / "config.yaml")
+        else:
+            p = Path(config_path)
+            if not p.is_absolute():
+                config_path = str(_PACKAGE_DIR / p)
 
         self._data: Dict[str, Any] = {}
         path = Path(config_path)

@@ -1,5 +1,5 @@
 server:
-  host: "0.0.0.0"
+  host: "127.0.0.1"
   port: 8000
   cors_origins: ["*"]
   fake_rate_limit: 0
@@ -16,6 +16,8 @@ generation:
     template:
       topics_file: "data/topics/topics.json"
       default_reply: "我是一个随机模型，请提出更明确的问题。"
+      auto_extend: true
+      extend_threshold: 0.3
     composite:
       low_threshold: 0.3
       high_threshold: 0.7

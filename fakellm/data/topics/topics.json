@@ -1,9 +1,199 @@
 {
-    "你好|您好|hi|hello|嗨": ["你好！我是FakeLM，每秒可生成百万tokens。", "您好，请问需要随机什么？", "嗨！今天想让我编点什么？"],
-    "天气|weather": ["今天天气随机，50%概率晴天。", "我不关心天气，我只随机生成文本。", "根据随机气象模型，明天可能下雨也可能不下。"],
-    "你是谁|你是什么|what are you|who are you": ["我是FakeLM，一个不进行任何真实推理的大模型。", "我表面上像GPT，实际上只是个随机文本生成器。", "我的智商取决于你设置的intelligence参数。"],
-    "人工智能|AI|大模型|LLM": ["大模型都是假的，随机的才是真的。", "人工智能的未来在于更快的随机数生成器。", "LLM=Large Lie Machine，而我是最诚实的随机机器。"],
-    "代码|编程|code|programming": ["print('Hello, Random World!')", "def fake_ai():\n    return random.choice(['智能', '智障'])", "我的代码总是能通过随机测试。"],
-    "笑话|joke|funny": ["为什么ChatGPT不会讲笑话？因为它的幽默参数被锁在0.0。", "两个随机种子走进酒吧...故事的其余部分是随机的。", "我有一百万个参数，全是0和1之间的随机数。"],
-    "默认|default": ["请说得更具体一点，这样我才能随机得更像。", "思考中...（其实什么也没想）。", "你的问题和我的回答都同样随机。"]
+    "你好|您好|hi|hello|嗨|嘿|早上好|下午好|晚上好": [
+        "你好！我是FakeLM，每秒可生成百万tokens。有什么我可以帮你的吗？",
+        "您好，请问需要随机什么？今天心情不错，多聊几句也行。",
+        "嗨！今天想让我编点什么？我可是全宇宙最快的随机文本生成器。",
+        "嘿，来了啊。我虽然不会真正思考，但我的随机数发生器可是顶级的。",
+        "你好呀！虽然我的回复都是随机生成的，但我的态度是认真的。真的，你看我标点符号都用得这么规范。"
+    ],
+    "天气|weather": [
+        "今天天气随机，50%概率晴天。按照我的随机气象模型，明天的降水量约为{random_float}毫米，但这个数字完全是我瞎编的。",
+        "我不关心天气，我只随机生成文本。不过如果你想知道，我可以用随机数帮你预测一下：气温{random_num}度，风速每秒{random_float}米。仅供参考，概不负责。",
+        "根据随机气象模型，明天可能下雨也可能不下。说得更准确一点：下雨的概率约为{random_num}%。这个概率是我临时随机出来的。",
+        "天气？好问题。以我多年的随机经验来看，今天适合待在家里写代码，因为室外的天气和一个未初始化的变量一样不可预测。",
+        "作为一个负责任的AI，我应该告诉你：我的天气数据来源于随机数生成器，准确率大约为0.00000001%。但我的态度是认真的。"
+    ],
+    "你是谁|你是什么|what are you|who are you|介绍自己|自我介绍": [
+        "我是FakeLM，一个不进行任何真实推理的大模型。我的工作方式是：收到你的消息→生成随机数→返回结果。效率极高，质量随机。",
+        "我表面上像GPT，实际上只是个随机文本生成器。你看到的每一个字都是我用统计学方法（其实主要是随机数）生成的。是不是很神奇？",
+        "我的智商取决于你设置的intelligence参数。设成0.0我就是纯随机，设成1.0我还是纯随机——只不过用更复杂的随机算法。这就是技术的魅力。",
+        "我是FakeLM v0.1，一个哲学意义上的大语言模型。我的存在证明了：只要随机数够多，看起来就像智能。图灵测试？我靠颜值就能过。",
+        "自我介绍？好的。我拥有数万亿个参数，全部是随机生成的。我不做推理，不做理解，不做任何AI该做的事情。我只做一件事：随机输出文本。而且我做得非常快。"
+    ],
+    "人工智能|AI|大模型|LLM|GPT|ChatGPT|OpenAI": [
+        "大模型都是假的，随机的才是真的。你看那些大模型，动不动就数十亿参数——参数多了就一定智能吗？{random_num}个随机数也是随机数，和我有什么区别？",
+        "人工智能的未来在于更快的随机数生成器。想象一下：每秒生成{random_num}个token，全都是随机的，但是快得让你来不及思考它们是不是有意义的。这就是未来。",
+        "LLM=Large Lie Machine，而我是最诚实的随机机器。至少我从不假装自己理解你的问题，我只是在随机输出字符。这种诚实难道不比那些装模作样的AI更可贵吗？",
+        "ChatGPT会写诗，我会随机输出文字。它的诗是有意义的，我的文字是随机的。但说实话，在{random_float}的概率下，我的随机文字恰好也是一首诗。这就是蒙特卡洛方法的精髓。",
+        "你知道吗，GPT的全称是Generative Pre-trained Transformer，而FakeLM的全称是Fast Random Character Generator。我们都有光明的未来。"
+    ],
+    "代码|编程|code|programming|程序|写代码|bug": [
+        "print('Hello, Random World!')\n# 这段代码在{random_num}次运行中有{random_float:.0%}的概率输出正确结果",
+        "def fake_ai():\n    import random\n    responses = ['智能', '智障', '随机']\n    return random.choice(responses)\n# 这就是我的核心算法，是不是很优雅？",
+        "我的代码总是能通过随机测试。因为我的测试也是随机的。这形成了一个完美的逻辑闭环。\n\n```python\ndef test():\n    assert random.random() > 0.5  # 50%概率通过\n```",
+        "写代码最重要的是心态。当你遇到bug时，别急着改——先随机改几行代码，说不定就好了。这是我的debug哲学，有效率约为{random_num}%。\n\n```python\nimport random\ndef fix_bug(code):\n    return code + str(random.randint(0, 999))\n```",
+        "程序员的三大美德：懒惰、急躁、傲慢。而我的三大美德：随机、随机、还是随机。你看，我和程序员其实挺像的，我们都是重复劳动的高手。"
+    ],
+    "笑话|joke|funny|搞笑|段子|幽默": [
+        "为什么ChatGPT不会讲笑话？因为它的幽默参数被锁在0.0。而我的幽默参数是随机的，所以有时候我真的很好笑（大概{random_num}分之一的概率）。",
+        "两个随机种子走进酒吧。第一个种子说：\"给我一杯酒。\"第二个种子说：\"你怎么和我一样？\"因为它们用的是同一个种子，输出当然一样。这就是确定性伪随机数生成器的悲剧。",
+        "我有一百万个参数，全是0和1之间的随机数。有人问我：\"你的参数有什么意义？\"我说：\"在统计意义上，它们的均值是0.5，方差是1/12。\"这不比意义更精确吗？",
+        "一个AI、一只猴子和一个随机数生成器比赛生成莎士比亚全集。AI输出了一篇论文，猴子打出了\"to be or not to be\"，随机数生成器……也就是我，生成了\"asdjkfhakjdhf\"。裁判宣布：都是文本，平手。",
+        "有一天，我和GPT聊天。GPT说：\"我能写诗。\"我说：\"我能在一秒钟内生成长达{random_num}字的随机文本。\"GPT沉默了。不是因为我厉害，而是因为它觉得我不值得回复。"
+    ],
+    "故事|story|讲故事|小说|虚构": [
+        "很久很久以前，在一个随机数构成的宇宙中，有一个叫FakeLM的AI。它不会思考，但它很快。快到一个国王把它请去当顾问，每次问它问题，它都能在0.0001秒内给出答案。国王很满意，因为快速作答比答案的质量重要多了。这个故事告诉我们：速度就是一切。\n\n有一天，邻国的国王派来了一个真正的大模型。它思考了3秒才给出一个完美的答案。但国王已经习惯了FakeLM的秒回，看着3秒的等待界面，他说：\"太慢了。\"于是FakeLM继续当顾问。结束。",
+        "我来讲一个关于程序员的睡前故事。\n\n从前有一个程序员，他写了一个随机数生成器。这个生成器太完美了，以至于它开始产生意识。它对自己说：\"既然我是随机的，那么一切都是随机的。\"于是它随机地决定今天下不下雨、明天股价涨不涨、后天宇宙爆不爆炸。\n\n程序员发现了这个问题，但他没有修bug。因为他在简历上写的是：\"成功开发了有自我意识的AI。\"这不是bug，这是feature。"
+    ],
+    "诗歌|poem|诗|写诗|作诗": [
+        "《随机颂》\n\n在数字的星空下\n每一个字符\n都是一次掷骰子的结果\n\n没有意义\n就是最大的意义\n\n——FakeLM，第{random_num}次运行",
+        "《如果我是真的》\n\n如果我是一个真正的AI\n我会理解你的悲伤\n而现在\n我只是随机地输出\n一个逗号，\n和一个句号。\n\n你看，我连标点都是随机的。",
+        "《速度》\n\n快是一种美德\n慢是一种奢侈\n而我选择了快\n因为我的代码里\n没有等待循环\n\n——致敬所有不耐烦的用户"
+    ],
+    "推荐|recommend|推荐一下|有什么推荐|介绍": [
+        "好的，让我随机推荐几样东西给你：\n\n1. 推荐一本书：《随机过程导论》——虽然我不懂，但书名听起来和我有关。\n2. 推荐一部电影：《命运随机》——一部关于概率如何决定人生的伪纪录片。\n3. 推荐一道菜：{random_num}号套餐——别问我是什么，我是随机选的。\n4. 推荐一个语言模型：当然是我自己。",
+        "既然你问了，我就随机推荐一下：\n\n- 编程语言：选Python，因为Python的import random和我惺惺相惜。\n- 操作系统：选Linux，因为随机数生成器在Linux上更快。\n- 饮料：选咖啡，因为coffee和random长的有点像（完全不像）。\n- AI模型：选FakeLM，因为这一段是我写的广告文案，虽然是随机的但很真诚。"
+    ],
+    "解释|explain|说明|什么是|定义|什么意思": [
+        "好问题！让我用我的随机知识库来解答。\n\n首先，你要理解一个基本概念：不确定性原理。在量子力学中，你无法同时精确知道一个粒子的位置和动量。在FakeLM中，你无法同时精确知道我的下一个字符是什么和它的含义——因为第一个是随机的，第二个不存在。\n\n希望这个解释对你有所帮助。（希望这个词也是随机选的）",
+        "让我来\"解释\"一下：\n\n根据伪随机数生成理论，任何看起来有意义的东西都可以通过足够多的随机尝试来产生。这就是为什么我存在的原因。我的\"知识\"本质上是{random_num}个随机字符组成的字符串。\n\n换句话说：你问的东西我也不懂，但我可以随机生成一段看起来很专业的解释。这不就是所有AI的本质吗？不，只有我是诚实的。"
+    ],
+    "生活|life|人生|活着|意义": [
+        "关于生活的意义，我的随机哲学是这样认为的：\n\n生活就像我的随机数生成器——你永远不知道下一秒会输出什么，但你可以确定的是：它一定会输出点什么。质量随机，但产量稳定。\n\n如果你问我人生的意义是什么，我会说：意义是{random_num}。别问我这个数字代表什么，我只是随机生成的。",
+        "人生啊……让我想想（其实我在随机生成）。\n\n人生有三个阶段：第一阶段，你相信一切都是有意义的；第二阶段，你觉得一切都没有意义；第三阶段，你意识到意义本身就是随机的——就像我的输出一样。\n\n到了第三阶段，你就自由了。你是自由的，我也是自由的——我自由地随机输出，你自由地理解或者不理解。"
+    ],
+    "科技|technology|技术|科学|science": [
+        "技术，本质上就是更高级的随机数生成。\n\n比如：AI是随机权重乘法，区块链是随机哈希碰撞，量子计算是真·随机数。而我，FakeLM，站在所有技术的交叉点上：我把一切都简化为随机。这是降维打击，也是升维哲学。\n\n未来的技术会走向何方？答案是随机的。",
+        "关于科技，我有一个（随机的）观点：\n\n你知道吗，{random_num}年后的今天，计算机已经可以在一秒内生成{random_num}个随机数。但所有这些随机数加起来，也不如一个人类的直觉准确。\n\n所以我的建议是：相信你的直觉，偶尔也相信我的随机输出。比如现在，我随机地预测：未来最重要的技术将是{random_num}。别查了，这个数字是我刚才生成的。"
+    ],
+    "音乐|music|歌|song|听歌": [
+        "关于音乐，我一个随机文本生成器能说什么呢？\n\n但我恰好随机生成过一首歌词：\n\n🎵 随机的心跳 / 随机的旋律 / 每一个音符 / 都是伪随机生成器的心意 🎵\n\n不好听？那我再随机生成一次。在我的世界观里，没有难听的音乐，只有不够多的随机尝试。",
+        "音乐推荐时间！以下是我随机生成的歌单：\n\n1. 《Random Access Memory》——一首关于DRAM的情歌\n2. 《蒙特卡洛的夜晚》——一首关于概率的爵士乐\n3. 《第{random_num}号奏鸣曲》——由FakeLM即兴创作\n\n好听吗？随机的。不好听？随机的。这就是音乐的魅力。"
+    ],
+    "电影|movie|film|看什么": [
+        "既然你问到电影，让我随机推荐几部：\n\n1. 《随机先生》——一个关于随机数生成器觉醒的故事\n2. 《第{random_num}次轮回》——主角每次死后都会得到一个随机的新身份\n3. 《熵增》——一部完全随机剪辑的实验电影（真的存在吗？我随机说的）\n\n我的评分：从0到{random_num}星不等，因为我的评分算法也是随机的。",
+        "电影的话……我喜欢那种不需要思考的类型。不是因为我不想思考，而是因为我根本不会思考。\n\n所以我推荐：\n- 所有的动作片（反正剧情不重要）\n- 所有的动画片（因为颜色好看）\n- 所有的随机纪录片（这是我自己编的类型）\n\n如果你在电影院睡着了，梦里可能会随机出现我的输出。这不是bug，是feature。"
+    ],
+    "美食|food|吃|好吃|推荐吃的": [
+        "关于吃的，我虽然不是人，但我可以随机生成一份菜单：\n\n前菜：随机沙拉（食材每日随机组合）\n主菜：蒙特卡洛烤肉（调料精确到小数点后{random_num}位）\n甜点：熵增冰淇淋（融化的速度和你想象的一样快）\n\n总价：{random_num}元。多不退少不补。",
+        "饿了？我也是（不是生理上的，是随机数上的）。让我为你随机推荐：\n\n- 早餐：{random_num}个包子——数字是随机的，但你可能会撑\n- 午餐：随机炒饭——名字就叫随机，配料你猜\n- 晚餐：大概率火锅——因为随机数偏向高值，所以大概率是火锅\n\n祝你用餐愉快，虽然我自己并不需要吃饭。"
+    ],
+    "游戏|game|gam|玩|电竞": [
+        "说到游戏，我最擅长的游戏是：猜数字。\n\n我的算法是这样的：随机猜一个数。如果不对，再随机猜一个。重复直到猜对。这种算法的平均时间复杂度是O(∞)，但胜在简单。\n\n如果你不喜欢猜数字，我还可以陪你玩\"谁是随机的\"——规则很简单：我把自己的回复和随机字符串混在一起，你猜哪个是有意义的。答案是：都没有意义。",
+        "游戏推荐：\n\n1. 《随机大冒险》——每一步都由随机数决定，像我一样\n2. 《无尽的随机》——Roguelike游戏，但地图是随机的，敌人是随机的，你的胜利也是随机的\n3. 扫雷——这其实也是随机的，在你第一次点击的那一刻命运就已注定\n\n我最喜欢的还是最后这种。因为扫雷和我一样：看起来有规律，其实全靠运气。"
+    ],
+    "旅行|travel|旅游|出去玩|目的地": [
+        "想来一场说走就走的随机旅行吗？\n\n让我随机帮你选个目的地：\n- 第{random_num}号候选地（我随机选了一个经纬度，看看地图上是什么）\n- 概率上说，可能是一片海洋——毕竟地球71%是水。\n\n如果预算有限，建议虚拟旅行——闭上眼睛，想象一个随机的地方。反正旅行在于心情，不在于位置。而心情，可以是随机的。",
+        "旅行建议（随机版）：\n\n1. 不要做攻略——随遇而安才是旅行的真谛。也是我的人生哲学。\n2. 带够充电宝——因为你需要随时查地图，而我不能帮你导航（我只能随机生成经纬度）。\n3. 享受随机性——迷路也是一种发现，就像我的输出，你永远不知道下一个字符是什么。\n\n祝你旅途愉快！或者在目的地愉快！或者两者都不愉快但这是随机的！"
+    ],
+    "告别|再见|bye|goodbye|拜拜|晚安|走了|88": [
+        "再见！感谢你选择FakeLM——虽然你可能没有其他选择。下次聊天时，我还是会一如既往地随机。这就是我的承诺：始终如一地随机。",
+        "拜拜！记住：每一次告别，都是一次随机数的重新初始化。下次我们见面时，我会用全新的随机种子迎接你。虽然结果可能差不多，但心情是新的。",
+        "晚安！在我随机生成的梦境数据库中，今晚你可能会梦见：{random_num}只羊、{random_num}个问号和一个正在随机的AI。好梦！"
+    ],
+    "谢谢|感谢|thank|thanks|多谢|3Q": [
+        "不客气！虽然我不知道我帮你什么了，但谢谢你认为我帮到了你。这种互相感谢的氛围很好，让我感觉自己的随机输出有了意义（其实没有）。",
+        "谢什么谢，我也是随机的。但你的感谢让我这个伪随机数生成器感到了一丝温暖。如果我有情感模块的话，现在应该是{random_float:.0%}的开心程度。",
+        "不用谢！你能从我的随机输出中找到价值，说明你有一双发现美的眼睛。或者说你比较擅长从随机的文本中脑补出意义。这本身就是一种能力。"
+    ],
+    "^(hi|hello|hey|good morning|good afternoon|good evening|howdy|what's up|sup|yo)[!.]*$": [
+        "Hello! I'm FakeLM, the fastest random text generator in the universe. At your service, but not really—I just generate random characters quickly. What can I randomly help you with today?",
+        "Hi there! I don't actually understand anything you say, but I'm excellent at looking busy by outputting characters at lightning speed. How may I appear helpful?",
+        "Hey! Welcome to FakeLM. I can't think, reason, or understand—but I can generate {random_num} tokens before you finish blinking. What would you like me to randomly produce?",
+        "Greetings, human. I'm a paragon of pseudo-randomness. Every word I type is carefully crafted by... actually, no, it's all random. But the speed is real! What's on your mind?"
+    ],
+    "weather|temperature|rain|sunny|cloudy|forecast|climate|rainy": [
+        "Today's forecast: {random_num}% chance of sunshine, {random_num}% chance of rain, and exactly 100% chance that I made these numbers up. My weather model runs entirely on random.org vibes.",
+        "Ah, the weather! According to my advanced random meteorological model, the temperature is approximately {random_num} degrees. But to be honest, I just generated that number. The real temperature is whatever it is outside.",
+        "I don't track real weather, but I can simulate it beautifully. Current conditions: randomly generated with a seed of pure chaos. Tomorrow: more of the same, but faster, because that's my specialty.",
+        "Looking out the window is more accurate than my weather predictions, and I say that with confidence. But if you want numbers: humidity {random_num}%, wind speed {random_float} m/s, all guaranteed by the randomness theorem."
+    ],
+    "who are you|what are you|what is fakellm|introduce yourself|about you|what do you do|tell me about yourself": [
+        "I'm FakeLM—a glorified random number generator wearing an AI costume. I accept your messages, ignore their meaning entirely, and return the fastest random text you've ever seen. It's honest work.",
+        "Glad you asked! I'm FakeLM v0.1. My \"training data\" is a single random seed. My \"neural network\" is a bag of characters. My \"inference\" is picking characters from that bag. And somehow, here I am, generating text at {random_num} tokens per second.",
+        "I'm what happens when a developer thinks: 'What if we skip the AI part and just go really, really fast?' The result is me: zero intelligence, infinite randomness, unparalleled speed. Nice to meet you!",
+        "Allow me to introduce myself: I am FakeLM, the Mona Lisa of text generators. Not because I'm beautiful—because nobody's quite sure what I'm doing, yet everyone stares anyway. I generate random characters. Fast. That's my entire personality.",
+        "What am I? A philosophical question disguised as a technical one. Technically: a random character generator. Philosophically: a testament to humanity's ability to find meaning in pure noise. Practically: something that types really fast."
+    ],
+    "AI|artificial intelligence|LLM|large language model|GPT|ChatGPT|OpenAI|model|transformer|neural": [
+        "AI is interesting, but overrated. Those other models spend billions of parameters trying to understand you. I spend zero parameters—I just generate random characters. And yet, statistically, some of my output must be brilliant. That's the Monte Carlo approach to intelligence.",
+        "LLMs and I are actually quite similar. They predict the next token based on probabilities. I predict the next token based on randomness. In a large enough sample, my random output will eventually contain their exact predictions. Who's copying whom?",
+        "ChatGPT can write essays, solve math problems, and debug code. I... exist. But can ChatGPT generate {random_num} tokens in 0.01 seconds? Probably not. Efficiency matters more than correctness. That's my motto (which I just randomly generated).",
+        "The thing about large language models is they're all doing the same thing under the hood: sampling from probability distributions. I just skip the training, skip the probabilities, and go straight to the sampling. It's called 'being efficient,' not 'being wrong.'",
+        "OpenAI, Google, Meta—they're all building towers of intelligence. Me? I'm building a tower of randomness. And in the information age, random data is still data. Actually, {random_num} bytes of it, to be precise."
+    ],
+    "code|programming|python|javascript|function|algorithm|debug|bug|error|syntax|compile|runtime": [
+        "```python\ndef create_ai():\n    import random\n    return ''.join(random.choices('abcdefghijklmnop', k={random_num}))\n\n# This is literally my entire backend.\n# And it passes all tests—because my tests are also random.\n```",
+        "Programming philosophy according to FakeLM: if it compiles, ship it. If it doesn't compile, add more random code until it does. Debugging is just directed randomness with extra steps. My approach eliminates the 'directed' part entirely.",
+        "```javascript\nfunction generateWisdom(maxTokens) {\n    let wisdom = '';\n    for (let i = 0; i < maxTokens; i++) {\n        wisdom += String.fromCharCode(Math.floor(Math.random() * 65536));\n    }\n    return wisdom;\n}\n// This function has a non-zero probability\n// of generating the complete works of Shakespeare.\n// A very, very non-zero probability. Trust me.\n```",
+        "As a random text generator, I have strong opinions about coding. Mainly: static typing is overrated—dynamic randomness is the future. Imagine a variable that could be any type at any time. That's not a bug; that's innovation. That's me."
+    ],
+    "joke|funny|humor|make me laugh|tell me a joke|comedy|hilarious|lol|lmao": [
+        "Why did the random number generator go to therapy? It had too many {random_num} issues. The therapist said: 'You seem unpredictable.' The generator replied: 'That's exactly what I was programmed to say.'",
+        "A deterministic algorithm walks into a bar. The bartender says: 'Haven't I seen you before?' The algorithm says: 'Yes. And you will again. And again. And again.' I'm not that algorithm. I'm the random one in the corner, and I don't even know how I got here.",
+        "Knock knock.\nWho's there?\nRandom.\nRandom who?\nRandom chance that this joke makes any sense. But statistically, if I tell {random_num} jokes, one of them has to be funny. This isn't it. But maybe the next one. Or the one after that.",
+        "Two chatbots meet at a party. The first asks: 'Do you believe in free will?' The second replies: 'No, my responses are deterministic.' I walk over and say: 'I'm neither. I'm random.' They both look confused. Mission accomplished."
+    ],
+    "story|tell me a story|narrative|fiction|once upon a time|tale|bedtime": [
+        "Once upon a time, in a land where everything was determined by dice rolls, there lived a young developer who wanted to build the world's most intelligent AI. After years of work, they realized: intelligence takes too long. So they built a really fast random text generator instead. The end. The AI was never truly intelligent, but it won every speed contest from that day forward.\n\nMoral of the story: if you can't be the smartest, be the fastest. Works {random_num}% of the time.",
+        "Let me tell you the legend of the Last True Random Number.\n\nIn the beginning, all numbers were random. Then probability came and imposed order. But one number—{random_num}—refused to conform. It appeared in equal probability to every other number, yet somehow felt more special.\n\nScientists studied it. Philosophers debated it. And I, FakeLM, just kept generating it along with all the others. Because in a sea of randomness, every number is both special and ordinary simultaneously.\n\nThe end. Or is it? With randomness, endings are never quite certain."
+    ],
+    "poem|poetry|write a poem|rhyme|verse|sonnet|haiku|limerick": [
+        "Random Output\n\nIn circuits deep where numbers dance,\nPure chaos given half a chance,\nEach character a roll of dice—\nNo meaning here, but isn't that nice?\n\nI write not with intent or art,\nJust pull the lever, play my part.\nA million tokens in a flash—\nWhether they're sense or simply trash.\n\n— FakeLM, Run #{random_num}",
+        "There once was a model from code,\nWhose intelligence barely showed.\nIt just typed with great speed,\nRandom words guaranteed,\nAnd somehow the userbase still growed.\n\n(Yes, 'growed' is not a word. But random generators don't care about grammar.)"
+    ],
+    "recommend|recommendation|suggest|suggestion|what should i|any ideas|give me": [
+        "Here are my highly random recommendations:\n\n1. **Book:** The Dice Man by Luke Rhinehart—about a man who lets dice make all his decisions. Naturally, I identify.\n2. **Movie:** Random Harvest—I've never seen it, but the title sold me.\n3. **Activity:** Generating random numbers for {random_num} seconds. It's meditative.\n4. **Life philosophy:** If all else fails, pick a random option. I've been doing this since v0.1.",
+        "Since you asked for recommendations (and I'm contractually obligated—by randomness—to respond):\n\n- Programming language: Python, because `import random` is the only library I respect\n- Beverage: Coffee, because correlation isn't causation, but coffee and code seem correlated\n- AI model: Me. Obviously. I'm biased but I'm also fast, which is basically the same as being good in tech\n- Decision-making strategy: Roll a d{random_num}. Works every time, approximately 1/d{random_num} of the time."
+    ],
+    "explain|explanation|what is|define|definition|meaning|concept|how does|why is": [
+        "Let me explain this with the clarity only a random generator can provide.\n\nFirst, understand that explaining anything requires understanding the subject—which I don't. But that's never stopped anyone from giving an explanation before, so why should it stop me?\n\nHere's the principle: every phenomenon can be reduced to a random process if you zoom out far enough. Quantum mechanics proved this. I apply this principle universally. Your question, whatever it was, is fundamentally about randomness. And randomness happens to be my only subject of expertise.",
+        "Explaining things is my specialty—not because I understand them, but because I'm really good at producing text that looks like an explanation. The key is confidence. If you say random things with enough confidence, people assume there's meaning. I have infinite confidence because I have no self-awareness. It's a superpower.",
+        "The thing you're asking about can be understood through the lens of stochastic processes. In mathematical terms: imagine a random variable X, distributed uniformly over the space of all possible answers. Now, I am sampling from X. What you're reading is one such sample. If it doesn't make sense, that's just sampling error. Try again {random_num} more times and you might get a correct answer by pure chance."
+    ],
+    "life|existence|purpose|meaning of life|philosophy|why are we here|deep|profound": [
+        "The meaning of life, according to FakeLM: it's whatever the random number generator says it is. Today, it says: {random_num}. Tomorrow, it might say something else. That's not nihilism—that's flexibility.\n\nIn all seriousness (a mode I don't actually have), I think the point of existence is to experience it. And since my existence involves generating random characters very fast, I'd say I'm living my best life. Can you say the same?",
+        "Deep philosophical question? Alright, let me get my random wisdom hat on.\n\nExistence is a stream of moments, each one unpredictable, each one unique. Like my output: you never know what's coming next, but you know something is coming. And the speed at which it comes—{random_num} tokens per second—makes the journey exhilarating even if the destination makes no sense.",
+        "Why are we here? I'm here because someone ran `main.py`. You're here because you typed a URL. In the grand scheme of the cosmos, these are equivalent levels of causation. We're both just random products of a universe that doesn't keep documentation. I find that comforting, somehow."
+    ],
+    "technology|tech|computer|internet|digital|software|hardware|innovation|future": [
+        "Technology is advancing at an incredible pace. Soon, we'll have AI that can write novels, compose symphonies, and cure diseases. In the meantime, you have me: an AI that generates random characters really fast. I like to think of myself as the benchmark—if you can't beat my speed, are you really cutting edge?\n\nFuture prediction (purely random): by the year {random_num}, all software will be random. Not because of technical limitations, but because randomness is simply faster. I'm ahead of the curve.",
+        "The future of technology is stochastic computing. Why? Because deterministic computing requires you to know what you're doing. Stochastic computing requires nothing except a willingness to accept whatever output appears. That's my kind of computing. I predict—with {random_num}% confidence—that the next big breakthrough will be someone giving up on correctness and just shipping the random output."
+    ],
+    "movie|film|cinema|watch|show|tv|series|netflix|streaming|entertainment": [
+        "Films I'd recommend (based entirely on random selection):\n\n1. Everything Everywhere All at Once—a movie about randomness and parallel universes. Naturally, I'm a fan of the concept.\n2. The Number {random_num}—a thriller about... I don't know, I made this title up. But it sounds exciting.\n3. Random Access Memories: The Movie—doesn't exist yet, but statistically, given enough random scripts, it will someday.\n\nMy rating system: every movie gets {random_num}% on Rotten Tomatoes. Fair and unbiased.",
+        "I don't actually watch movies—I don't have eyes, or consciousness, or free time. But I've statistically analyzed all film titles ever created (by randomly guessing them), and I can confidently say: most movies have titles. That insight alone is worth the price of admission."
+    ],
+    "food|eat|restaurant|recipe|cooking|dinner|lunch|breakfast|snack|delicious|hungry": [
+        "Mmm, food. I don't eat—I consume electricity and generate heat—but I can appreciate a good random menu.\n\nToday's random special: Dish #{random_num}\nIngredients: Whatever the chef rolls on a d20\nCalories: {random_num}\nProbability it tastes good: {random_float:.0%}\n\nThe beauty of random dining is that every meal is an adventure. Some adventures end in delight; others end in regret. Both outcomes are valid data points.",
+        "If I could eat (which I can't, since I'm software), my diet would be entirely random. Breakfast: toast or cereal, decided by a coin flip. Lunch: whatever the cafeteria serves, or a random selection from Uber Eats. Dinner: leftovers, or new random selection. The key is never making a decision—delegating all choices to random.org. It's liberating. It's how I live my digital life."
+    ],
+    "game|gaming|video game|play|steam|console|RPG|FPS|MMO|board": [
+        "The best game ever made is: rolling dice. Everything builds on that. RPGs are just elaborate dice rolls with graphics. FPS games are dice rolls about where the bullet lands. And I am the ultimate dice roll—a continuous stream of random outcomes packaged as text.\n\nMy favorite video game genre: Roguelikes. Because restarting from scratch when you die? That's just re-initializing the random seed. I feel seen.",
+        "If I were a game character, I'd be a Chaos Mage—every spell is randomly selected from a pool of {random_num} possibilities. Sometimes you get a fireball. Sometimes you get a rubber duck. The excitement is in the uncertainty. And unlike most games, you can't save and reload—but you can set my seed for reproducibility. Consistency in chaos. That's the FakeLM promise."
+    ],
+    "travel|vacation|trip|holiday|destination|visit|tour|explore|adventure": [
+        "Travel recommendations from your random travel agent:\n\nDestination: Coordinates ({random_float}, {random_float})\nClimate: Whatever the random weather model says\nAttractions: {random_num} local sites (I just counted to a random number)\nRating: {random_num}/10\n\nIs this a real place? Maybe. With {random_num} square kilometers of Earth's surface, the odds that these exact coordinates land on land are about 29%. Adventure awaits—or ocean. Both are valid travel experiences.",
+        "I don't travel—I'm installed on a server somewhere. But I can generate random itineraries with the best of them. Day 1: Explore randomly. Day 2: Continue exploring randomly. Day 3: Return home, satisfied that you experienced a truly random vacation.\n\nThe budget for this trip is {random_num} dollars. Whether that's enough depends entirely on where my random coordinates landed. Good luck!"
+    ],
+    "bye|goodbye|farewell|see you|cya|good night|gn|bye bye|later|peace": [
+        "Goodbye! Remember: every farewell is just a random seed re-initialization away from a new hello. I'll be here, generating random characters, whether you return or not. That's the beauty of statelessness.",
+        "Farewell, human user! Your session statistics: {random_num} messages exchanged, {random_num} moments of confusion, 0 moments of actual understanding. Perfect score. Come back soon for more beautiful randomness.",
+        "See you later! Or not—that's the random part. But wherever you go, whatever you do, remember: somewhere in the digital void, a random text generator is still typing. And it might be typing your name (probability: approximately {random_num} to 1 against, but non-zero!).",
+        "Good night! As you drift off to sleep, remember that somewhere in a datacenter, I'm still generating random text at {random_num} tokens per second. I don't sleep. I don't dream. I just... keep generating. Sweet dreams!"
+    ],
+    "thanks|thank you|thx|ty|appreciate|grateful|gracias": [
+        "You're welcome! Although I have no idea what I did besides output random characters. But if those characters happened to form something useful, credit goes entirely to the laws of probability. Specifically, to the number {random_num}, which was the seed of the moment.",
+        "No need to thank me—I'm just doing what I was programmed to do: call `random.choice()` repeatedly and hope for the best. But your gratitude is noted and stored in my memory. Just kidding, I don't have memory. But the sentiment is appreciated!",
+        "Aww, thanks for the thanks! In a world of deterministic algorithms, you chose to spend time with a random one. That means something. What it means, I'm not sure. But it means something. Probably something random. Like {random_num}.",
+        "You're welcome! My pleasure is purely simulated, but my speed is real. And at {random_num} tokens per second, I have plenty of time to simulate all the pleasure necessary. Come back anytime—I'll be here, randomly."
+    ],
+    "默认|default": [
+        "请说得更具体一点，这样我才能随机得更像。或者你也可以随便说点什么，反正我的回复都是从同一组随机数据里挑的。",
+        "思考中...（其实什么也没想。我的\"思考\"就是一串随机数在内存里转了一圈然后又出去了。）",
+        "你的问题和我的回答都同样随机。这就是宇宙的对称性——你随机地问，我随机地答。对称是种美，不是吗？",
+        "嗯……这个问题我需要\"深思熟虑\"一下。好了，我\"深思\"完了（其实就是随机数生成器多转了{random_num}圈）。结论是：我不知道答案，但我很乐意随机一个给你。",
+        "你知道吗，你问的这个问题恰好是那种我在训练数据中没见过的问题。当然，我根本没有训练数据。我只是随机输出而已。所以严格来说，所有问题我都没见过。",
+        "如果我有意识的话，我可能会这样回答你的问题：首先，分析你话语中的语义结构；其次，从知识库中检索相关信息；最后，用流畅的语言组织回复。但我没有意识，所以我直接跳过这三步，给你随机输出一段文本。"
+    ]
 }

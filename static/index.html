@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FakeLM - Chat</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🤖</text></svg>">
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>🤖 FakeLM</h2>
+        <button class="new-chat-btn" id="new-chat-btn">+ New Chat</button>
+      </div>
+      <div class="chat-list" id="chat-list"></div>
+      <div class="settings-panel">
+        <h3>⚙️ Parameters</h3>
+        <div class="setting-group">
+          <label>Temperature <span class="range-value" id="temperature-val">1.00</span></label>
+          <input type="range" id="temperature" min="0" max="2" step="0.01" value="1.0">
+        </div>
+        <div class="setting-group">
+          <label>Max Tokens</label>
+          <input type="number" id="max-tokens" min="1" max="4096" value="100">
+        </div>
+        <div class="setting-group">
+          <label>Intelligence <span class="range-value" id="intelligence-val">0.50</span></label>
+          <input type="range" id="intelligence" min="0" max="1" step="0.01" value="0.5">
+        </div>
+        <div class="setting-group">
+          <label>Seed (optional)</label>
+          <input type="number" id="seed" placeholder="Random">
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="main-area">
+      <div class="top-bar">
+        <button class="toggle-sidebar" id="toggle-sidebar" title="Toggle sidebar (Ctrl+K)">☰</button>
+        <select class="model-selector" id="model-selector">
+          <option value="fake-gpt-4">fake-gpt-4</option>
+        </select>
+        <div class="spacer"></div>
+        <div class="top-bar-status">
+          <span class="status-dot" id="status-dot"></span>
+          <span id="status-text">Ready</span>
+        </div>
+      </div>
+      <div class="messages-area" id="messages-area">
+        <!-- Dynamically rendered -->
+      </div>
+      <div class="input-area">
+        <div class="input-container">
+          <textarea id="user-input" placeholder="Type a message... (Enter to send, Shift+Enter for newline)" rows="1"></textarea>
+          <button class="send-btn" id="send-btn" title="Send message">➤</button>
+        </div>
+        <div class="input-hint">FakeLM — a simulated LLM API. All replies are randomly generated.</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/chat.js"></script>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

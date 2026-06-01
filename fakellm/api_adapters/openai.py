@@ -49,18 +49,23 @@ def to_internal(request_dict: Dict[str, Any]) -> InternalRequest:
     )
 
 
-def from_internal(response: InternalResponse, model: str = "fake-gpt-4") -> Dict[str, Any]:
+def from_internal(
+    response: InternalResponse,
+    model: str = "fake-gpt-4",
+    stats: Dict[str, Any] | None = None,
+) -> Dict[str, Any]:
     """
     Convert an internal response to an OpenAI non-streaming ChatCompletion response.
 
     Args:
         response: The internal generation response.
         model: The model name to report.
+        stats: Optional performance stats dict with keys: engine, elapsed, tokens, speed.
 
     Returns:
         A dict matching the OpenAI ChatCompletion schema.
     """
-    return {
+    result = {
         "id": f"chatcmpl-{uuid.uuid4().hex[:12]}",
         "object": "chat.completion",
         "created": int(time.time()),
@@ -81,6 +86,9 @@ def from_internal(response: InternalResponse, model: str = "fake-gpt-4") -> Dict
             "total_tokens": max(1, len(response.text) // 2) + response.tokens_used,
         },
     }
+    if stats:
+        result["x_fakellm_stats"] = stats
+    return result
 
 
 def stream_chunk(model: str, content: str, finish_reason: str | None = None) -> Dict[str, Any]:
@@ -122,6 +130,19 @@ def build_sse_event(data: Dict[str, Any]) -> str:
         An SSE-formatted string: 'data: {json}\\n\\n'.
     """
     return f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
+
+
+def build_stats_event(stats: Dict[str, Any]) -> str:
+    """
+    Format a stats dict as an SSE event string with event type x_fakellm_stats.
+
+    Args:
+        stats: Performance stats dict.
+
+    Returns:
+        An SSE-formatted string with event: x_fakellm_stats.
+    """
+    return f"event: x_fakellm_stats\ndata: {json.dumps(stats, ensure_ascii=False)}\n\n"
 
 
 def get_models_list() -> Dict[str, Any]:
