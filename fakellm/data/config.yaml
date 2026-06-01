@@ -1,0 +1,28 @@
+server:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["*"]
+  fake_rate_limit: 0
+
+generation:
+  default_engine: "composite"
+  engines:
+    random_char:
+      charset: "ascii+digit+common_chinese"
+    markov:
+      n: 2
+      chain_file: "data/markov_chains/zh_2gram.json"
+      fallback_to_random: true
+    template:
+      topics_file: "data/topics/topics.json"
+      default_reply: "我是一个随机模型，请提出更明确的问题。"
+    composite:
+      low_threshold: 0.3
+      high_threshold: 0.7
+      low_engine: "random_char"
+      mid_engine: "template"
+      high_engine: "markov"
+
+logging:
+  level: "INFO"
+  show_tokens_per_second: true

@@ -1,0 +1,1 @@
+"""API adapter modules for external API format compatibility."""
